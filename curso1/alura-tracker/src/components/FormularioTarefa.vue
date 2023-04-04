@@ -10,26 +10,11 @@
                     type="text"
                     class="input"
                     placeholder="Qual tarefa você deseja iniciar?"
+                    v-model="descricao"
                 />
             </div>
             <div class="column">
-                <div
-                    class="is-flex is-align-items-center is-justify-content-space-between"
-                >
-                    <CronometroTarefa :tempoEmSegundos="tempoEmSegundos"/>
-                    <button class="button" @click="iniciar">
-                        <span class="icon">
-                            <i class="fas fa-play"></i>
-                        </span>
-                        <span>play</span>
-                    </button>
-                    <button class="button" @click="finalizar">
-                        <span class="icon">
-                            <i class="fas fa-stop"></i>
-                        </span>
-                        <span>stop</span>
-                    </button>
-                </div>
+                <Temporizador @aoTemporizadorFinalizado="finalizarTarefa"/>
             </div>
         </div>
     </div>
@@ -37,26 +22,22 @@
 
 <script lang="ts">
 import { defineComponent  } from 'vue';
-import CronometroTarefa from './CronometroTarefa.vue';
+import Temporizador from './TemporizadorTarefa.vue';
 
 export default defineComponent({
     name: "FormulárioTarefa",
-    components: { CronometroTarefa },
+    components: { Temporizador },
     data() {
         return {
-            tempoEmSegundos: 0,
-            cronometro: 0
-        };
-    },
-    methods: {
-        iniciar() {
-            this.cronometro = setInterval(() => {
-                this.tempoEmSegundos += 1;
-            }, 1000);
-        },
-        finalizar() {
-            clearInterval(this.cronometro);
+            descricao: ''
         }
     },
+    methods: {
+        finalizarTarefa(tempoDecorrido: number): void{
+            console.log(tempoDecorrido)
+            console.log('descricao da tarefa', this.descricao)
+            this.descricao = ''
+        }
+    }
 })
 </script>
