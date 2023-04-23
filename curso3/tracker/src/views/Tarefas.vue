@@ -1,5 +1,6 @@
 <template>
-    <Formulario @aoSalvarTarefa="salvarTarefa"/>
+    <!-- <Formulario @aoSalvarTarefa="salvarTarefa"/> -->
+    <Formulario />
     <div class="lista">
         <Box v-if="semTarefas">
             Você não está muito produtivo hoje <span class="has-text-weight-bold">:(</span>
@@ -9,11 +10,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { computed, defineComponent } from "vue";
 import Formulario from "../components/Formulario.vue";
 import Tarefa from "../components/Tarefa.vue";
 import Box from "../components/Box.vue";
-import ITarefa from "../interfaces/ITarefa"
+import { useStore } from "@/store";
+import { OBTER_TAREFAS } from "@/store/tipo-acoes";
 
 export default defineComponent({
   name: "App",
@@ -22,19 +24,22 @@ export default defineComponent({
     Tarefa,
     Box
   },
-  data () {
-    return {
-      tarefas: [] as ITarefa[]
-    }
-  },
   methods: {
-    salvarTarefa (tarefa:ITarefa) : void {
-      this.tarefas.push(tarefa)
-    }
+    // salvarTarefa (tarefa:ITarefa) : void {
+    //   this.tarefas.push(tarefa)
+    // }
   },
   computed: {
     semTarefas () :boolean {
       return this.tarefas.length == 0
+    }
+  },
+  setup() {
+    const store = useStore()
+    store.dispatch(OBTER_TAREFAS)
+    return {
+      tarefas: computed(()=> store.state.tarefas),
+      store
     }
   }
 });
