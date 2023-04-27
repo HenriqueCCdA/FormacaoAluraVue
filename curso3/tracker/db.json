@@ -5,8 +5,12 @@
       "id": 1
     },
     {
-      "nome": "Projeto 1",
-      "id": 2
+      "id": 2,
+      "nome": "Byte Bank 2.0"
+    },
+    {
+      "nome": "Estudando padrões de arquitetura",
+      "id": 3
     }
   ],
   "tarefas": [
@@ -27,6 +31,24 @@
         "id": 1
       },
       "id": 2
+    },
+    {
+      "duracaoEmSegundos": 4,
+      "descricao": "Refa",
+      "projeto": {
+        "nome": "Alura Tracker 4.0",
+        "id": 1
+      },
+      "id": 3
+    },
+    {
+      "duracaoEmSegundos": 5,
+      "descricao": "asdsad",
+      "projeto": {
+        "id": 2,
+        "nome": "Byte Bank 2.0"
+      },
+      "id": 4
     }
   ]
 }
