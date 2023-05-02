@@ -18,32 +18,29 @@
       :key="index"
       @aoTarefaClicada="selecionarTarefa"
     />
-    <div class="modal" :class="{ 'is-active': tarefaSelecionada }" v-if="tarefaSelecionada">
-      <div class="modal-background"></div>
-      <div class="modal-card">
-        <header class="modal-card-head">
-          <p class="modal-card-title">Editando uma tarefa</p>
-          <button class="delete" aria-label="close"></button>
-        </header>
-        <section class="modal-card-body">
-          <div class="field">
+    <Modal :mostrar="tarefaSelecionada != null">
+        <template v-slot:cabecalho>
+            <p class="modal-card-title">Editando uma tarefa</p>
+            <button class="delete" aria-label="close"></button>
+        </template>
+        <template v-slot:corpo>
+            <div class="field">
             <label for="DescricaoDaTarefa" class="label">
-              Descricao
+                Descricao
             </label>
             <input
-              type="text"
-              class="input"
-              v-model="tarefaSelecionada.descricao"
-              id="DescricaoDaTarefa"
+                type="text"
+                class="input"
+                v-model="tarefaSelecionada.descricao"
+                id="DescricaoDaTarefa"
             />
-          </div>
-        </section>
-        <footer class="modal-card-foot">
-          <button @click="alterarTarefa" class="button is-success">Salvar alterações</button>
-          <button @click="fecharModal" class="button">Cancelar</button>
-        </footer>
-      </div>
-    </div>
+            </div>
+        </template>
+        <template v-slot:rodape>
+            <button @click="alterarTarefa" class="button is-success">Salvar alterações</button>
+            <button @click="fecharModal" class="button">Cancelar</button>
+        </template>
+    </Modal>
   </div>
 </template>
 
@@ -55,14 +52,16 @@ import Box from "../components/Box.vue";
 import { useStore } from "@/store";
 import { CADASTRAR_TAREFA, OBTER_PROJETOS, OBTER_TAREFAS, ALTERAR_TAREFA } from "@/store/tipo-acoes";
 import ITarefa from "@/interfaces/ITarefa";
+import Modal from "@/components/Modal.vue";
 
 export default defineComponent({
   name: "App",
   components: {
     Formulario,
     Tarefa,
-    Box
-  },
+    Box,
+    Modal
+},
   data() {
     return {
       tarefaSelecionada: null as ITarefa | null

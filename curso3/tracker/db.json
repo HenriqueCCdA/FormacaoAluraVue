@@ -43,7 +43,7 @@
     },
     {
       "duracaoEmSegundos": 5,
-      "descricao": "asdsad",
+      "descricao": "Teste",
       "projeto": {
         "id": 2,
         "nome": "Byte Bank 2.0"
